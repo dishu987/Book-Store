@@ -1,0 +1,428 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Mulish", sans-serif;
+    /* user-select: none; */
+    /* user-zoom: none; */
+}
+
+.content {
+    height: max-content;
+    overflow: hidden;
+    color: var(--black3);
+    background-color: var(--black);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.content>.container {
+    position: relative;
+    padding: 20px;
+    width: 100vw;
+    font-size: 20px;
+    line-height: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px auto;
+}
+
+.content>.container>p {
+    position: absolute;
+    top: 10px;
+    left: 30%;
+    font-weight: 600;
+    font-size: xx-large;
+    color: var(--black3);
+}
+
+.content>.container>ul {
+    position: absolute;
+    top: 10px;
+    right: 25%;
+    list-style: none;
+    height: 10px;
+    margin-left: 20px;
+    font-size: xx-large;
+    animation: anm-swaps 8s ease-in-out infinite alternate-reverse;
+    -webkit-animation: anm-swaps 8s ease-in-out infinite alternate-reverse;
+}
+
+.content>.container>ul>li:nth-child(2n + 1) {
+    color: var(--yellow);
+}
+
+.content>.container>ul>li:nth-child(2n + 2) {
+    color: var(--red1);
+}
+
+@media only screen and (max-width: 600px) {
+    .content>.container>ul {
+        right: 5%;
+        font-size: medium;
+    }
+    .content>.container>p {
+        left: 10%;
+        font-size: x-large;
+    }
+}
+
+.content>.container>ul>li {
+    margin-bottom: 20px;
+}
+
+@keyframes anm-swaps {
+    0% {
+        top: 10px;
+    }
+    30% {
+        top: -20px;
+    }
+    50% {
+        top: -60px;
+    }
+    75% {
+        top: -90px;
+    }
+    100% {
+        top: -90px;
+    }
+}
+
+.search-book {
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: max-content;
+    margin: 20px;
+}
+
+.search-book>form {
+    width: 40vw;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 600px) {
+    .search-book>form {
+        width: 80vw;
+    }
+}
+
+.search-book>form>input[type="text"],
+.custom-input {
+    color: var(--yellow1);
+    outline: none;
+    border: none;
+    padding: 10px;
+    background-color: var(--orange);
+    width: 70%;
+    border: 1px dashed var(--orange);
+}
+
+.custom-input {
+    width: 100%;
+}
+
+.search-book>form>input[type="text"]:hover,
+.custom-input:hover {
+    background-color: var(--orange);
+    border: 1px dashed var(--black3);
+}
+
+.search-book>form>input[type="text"]::placeholder,
+.custom-input::placeholder {
+    color: var(--black);
+}
+
+.search-book>form>button,
+.custom-btn {
+    color: var(--black);
+    outline: none;
+    border: none;
+    padding: 10px;
+    width: 30%;
+    background-color: var(--yellow1);
+    transition: 0.5s ease;
+    border: 1px dashed var(--yellow1);
+}
+
+.search-book>form>button:hover,
+.custom-btn:hover {
+    background-color: var(--black3);
+    border: 1px dashed var(--orange);
+    color: var(--black);
+}
+
+.search-book>.recent_searches {
+    background-color: transparent;
+    color: var(--yellow);
+    margin: 20px 50px;
+}
+
+.search-book>.recent_searches>ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    margin: 20px 50px;
+    width: 80vw;
+    padding: 10px 0px;
+    position: relative;
+}
+
+.search-book>.recent_searches>ul::before {
+    content: "RECENT";
+    position: absolute;
+    top: -30px;
+    left: -5px;
+    padding: 10px;
+    font-size: 0.8rem;
+    color: var(--black3);
+}
+
+.search-book>.recent_searches>ul>li {
+    border: 1px solid var(--yellow);
+    margin: 1px 5px;
+    border-radius: 16px;
+    padding: 1px 5px;
+    font-size: smaller;
+    width: max-content;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+    transition: 0.5s ease-in-out;
+}
+
+.search-book>.recent_searches>ul>li:hover {
+    background-color: var(--yellow1);
+    color: var(--black);
+}
+
+.search-book>.recent_searches>ul>li>a {
+    text-decoration: none;
+    color: inherit;
+    text-transform: uppercase;
+}
+
+@media only screen and (max-width: 600px) {
+    .search-book>.recent_searches>ul>li {
+        margin: 1px 5px;
+        padding: 1px 5px;
+        font-size: smaller;
+    }
+    .search-book>.recent_searches>ul {
+        flex-wrap: wrap;
+        margin: 20px 50px;
+        padding: 10px 0px;
+    }
+}
+
+.content>.title-company {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content>.book-company {
+    /* background-color: #e17055; */
+    padding: 10px;
+    margin-bottom: 50px;
+    width: 100%;
+    color: var(--black);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.content>.book-company>.company-logo {
+    background-color: var(--yellow);
+    margin: 20px 50px;
+    width: 200px;
+    color: var(--black);
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: 0.5s ease-in;
+}
+
+.content>.book-company>.company-logo:hover {
+    transform: scale(1.05);
+}
+
+.content>.book-company>.company-logo::before {
+    content: "";
+    height: 50%;
+    width: 60%;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    border-left: 1px solid var(--yellow);
+    border-top: 1px solid var(--yellow);
+    transition: 0.5s ease-in-out;
+}
+
+.content>.book-company>.company-logo:hover::before {
+    height: 80%;
+    width: 80%;
+}
+
+.content>.book-company>.company-logo::after {
+    content: "";
+    height: 20%;
+    width: 30%;
+    position: absolute;
+    right: -10px;
+    bottom: -10px;
+    border-right: 1px solid var(--yellow);
+    border-bottom: 1px solid var(--yellow);
+    transition: 0.5s ease-in-out;
+}
+
+.content>.book-company>.company-logo:hover::after {
+    height: 30%;
+    width: 40%;
+}
+
+.content>.book-company>.company-logo>img {
+    width: 100px;
+    height: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .content>.book-company {
+        /* background-color: #e17055; */
+        flex-wrap: wrap;
+        padding: 10px;
+        width: 100%;
+    }
+    .content>.book-company>.company-logo {
+        background-color: var(--yellow);
+        margin: 20px 20px;
+        width: 100px;
+        color: var(--black);
+        height: 100px;
+    }
+}
+
+
+/* Loader */
+
+.book-content {
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-content>.book-loader {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.book-content>.book-loader>ul {
+    display: flex;
+    border-radius: 20px;
+    position: relative;
+}
+
+.book-content>.book-loader>ul li {
+    list-style: none;
+    height: 50px;
+    width: 10px;
+    background-color: var(--black3);
+    margin: auto 5px;
+    animation: bouncing 1s linear infinite alternate-reverse;
+}
+
+@keyframes bouncing {
+    0% {
+        height: 50px;
+        width: 10px;
+    }
+    50% {
+        height: 10px;
+        width: 10px;
+    }
+    100% {
+        height: 50px;
+        width: 10px;
+    }
+}
+
+.book-content>.book-loader>ul li:nth-child(2) {
+    animation-delay: 0.2s;
+    background-color: var(--yellow);
+}
+
+.book-content>.book-loader>ul li:nth-child(3) {
+    animation-delay: 0.6s;
+    background-color: var(--black3);
+}
+
+.book-content>.book-loader>ul li:nth-child(4) {
+    animation-delay: 0.1s;
+    background-color: var(--yellow);
+}
+
+.book-content>.book-loader>ul li:nth-child(5) {
+    animation-delay: 0.5s;
+    background-color: var(--black3);
+}
+
+
+/* page-change */
+
+.page-change {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    padding: 50px 20px;
+}
+
+.page-active {
+    background-color: var(--yellow);
+}
+
+
+/* companies images */
+
+.title-company>h1 {
+    position: relative;
+}
+
+.title-company>h1::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 30%;
+    height: 5px;
+    background-color: var(--yellow);
+    transition: 0.5s ease-in-out;
+}
+
+.title-company>h1:hover::before {
+    width: 60%;
+}

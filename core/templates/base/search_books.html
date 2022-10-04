@@ -1,0 +1,145 @@
+{% extends 'base/base.html' %} {% load static %} {% block title %}Resutls{% endblock title %}
+<!-- Search here... -->
+{% block search_book %}
+
+<div class="books">
+    {% if is_valid %}
+    <div class="book_result" style="margin:20px 50px">
+        <p>Page No.:{{page}} | Totol Resutls: {{data|length}}/{{tot_result}} books from amazon</p>
+    </div>
+    <div class="custom_pag">
+        {% if 2 > page %}
+        <a type="button" class="custom-btn" style="cursor: not-allowed;" disabled><svg
+                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+            Prev</a> {% else %}
+        <a type="button" class="custom-btn" href="{% url 'find' name page|add:-1 %}"><svg
+                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+            </svg>
+            Prev</a> {%endif%}
+        <div></div>
+        <a type="button" class="custom-btn" href="{% url 'find' name 1 %}">
+            Home</a>
+        <div></div>
+        {% if page|add:1 > tot_pages %}
+        <a type="button" class="custom-btn" style="cursor: not-allowed;" disabled>Next
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+            </svg>
+        </a> {% else %}
+        <a type="button" class="custom-btn" href="{% url 'find' name page|add:1 %}">Next
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+            </svg>
+        </a> {%endif%}
+    </div>
+    {% for x in data %}
+    <!-- [product_name, rating, rating_count, price, product_url,product_img] -->
+    <div class="book-card">
+        <div class="name-reveal" id="name-reveal{{forloop.counter}}">
+            {{x.0}}
+        </div>
+        <span class="company-name">Amazon</span>
+        <div class="image">
+            <img src="{{x.5}}" alt="" srcset="">
+        </div>
+        <div class="book-info">
+            <div class="book-name" id="book{{forloop.counter}}" title="{{x.0}}">
+                {{x.0}}
+            </div>
+            <script>
+                if ("{{x.0}}".length >= 25) {
+                    let string1 = "{{x.0}}".slice(0, 24) + "..";
+                    document.getElementById("book{{forloop.counter}}").innerHTML = string1;
+                }
+            </script>
+            <div class="book-auth">
+                by <strong style="color:brown">{{x.7}}</strong> on
+                <span class="book-date">
+                    {{x.6}}
+                </span>
+            </div>
+            <div class="book-rating">
+                <div class="rating">
+                    {{x.1}} {{x.2}}
+                </div>
+                <div class="stars" style="color:red;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                        <path
+                            d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                    </svg>
+                </div>
+            </div>
+            <div class="book-price">
+                <div class="now-price">
+                    $.{{x.3}}
+                </div>
+                <div class="price-actual" style="text-decoration: line-through;">
+                    {{x.8}}
+                </div>
+            </div>
+
+            <div class="book-link">
+                <a href={{x.4}} id="buy" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                        <path
+                            d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
+                    </svg> Buy
+                </a>
+                {% if request.user.is_authenticated%}
+                <form method="POST">
+                    <!-- ('id','title','selling_price','discounted','description','brand','product_image',) -->
+                    {% csrf_token %}
+                    <input type="text" name="save_to_fav" value="save_to_fav" hidden>
+                    <input type="text" name="title" value="{{x.0}}" hidden>
+                    <input type="text" name="selling_price" value="{{x.3}}" hidden>
+                    <input type="text" name="discounted" value="{{x.8}}" hidden>
+                    <input type="text" name="description" value="{{x.0}}" hidden>
+                    <input type="text" name="brand" value="Amazon" hidden>
+                    <input type="text" name="product_image" value="{{x.5}}" hidden>
+                    <input type="text" name="auther" value="{{x.6}}" hidden>
+                    <input type="text" name="date" value="{{x.7}}" hidden>
+                    <input type="text" name="rating_count" value="{{x.1}}" hidden>
+                    <input type="text" name="rating" value="{{x.2}}" hidden>
+                    <button type="submit" id="save_to_fav" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-star-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                        </svg> Save
+                    </button>
+                </form>{%endif%}
+            </div>
+        </div>
+    </div>
+    {%endfor%} {%else%}
+    <h3>Not found</h3>
+    {%endif%}
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %} {% load static %} {% block title %}Home{% endblock title %}
+<!-- Please wait loading... -->
+{% block login %}
+<div class="container">
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3">
+            <form method="post" novalidate class="shadow p-5" style="background-color:var(--black2);">
+                <h3 style="color:var(--black1);font-weight: 600;">Login</h3>
+                {% if form.non_field_errors%} {%for error in form.non_field_errors%}
+                <p class="alert alert-danger my-3">{{error}}</p>
+                {%endfor%} {%endif%}
+                <hr style="color:var(--black1);font-weight: 600;"> {% csrf_token%} {% for fm in form %}
+                <div class="form-group">
+                    <div style="width: 100%;">
+                        {{fm}}
+                    </div>
+                    <small class="text-danger">
+                        {{fm.errors|striptags}}
+                    </small><br>
+                </div>
+                {%endfor%}
+                <input type="submit" class="custom-btn" value="Login">
+                <br>
+            </form>
+            <div class="alert alert-warning">New to BOOKSTORE? <a href="{% url 'registration'%}" class="text-danger">Create
+                    an Account</a></div>
+        </div>
+    </div>
+</div>
+{% endblock login %}

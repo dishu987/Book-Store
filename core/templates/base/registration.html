@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %} {% load static %} {% block title %}Registration{% endblock title %}
+<!-- Please wait loading... -->
+{% block registration %}
+<div class="container">
+    <div class="row my-3">
+        <div class="col-sm-6 offset-sm-3">
+            <form method="post" novalidate class="shadow p-5" style="background-color: var(--black2);">
+                <h3 style="font-weight: 600;color: var(--black1)">Create New Account</h3>
+                <hr style="font-weight: 600;color: var(--black1)"> {% if messages %} {%for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{message.tags}} my-3" {%endif%}>{{message}}</div>
+                {%endfor%} {%endif%} {% csrf_token %} {% for fm in form %}
+                <div class="form-group mb-3">
+                    <div>
+                        {{fm}}
+                    </div>
+                    <small class="text-danger">
+                        {{fm.errors|striptags}}
+                    </small>
+                </div>
+                {%endfor%}
+                <div class="text-end">
+                    <input type="submit" value="Create Account" class="custom-btn">
+                </div>
+                <br>
+                <div class="text-center text-primary fw-bold"><small>Existing User ? <a href="{% url 'login' %}"
+                            class="text-danger">Login Now</a> </small></div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock registration %}

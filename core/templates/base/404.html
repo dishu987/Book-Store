@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %} {% load static %} {% block title %}404-Oops{% endblock title %}
+<!-- Please wait loading... -->
+{% block 404_error%}
+<div class="custom-input" style="margin: 10px 50px;padding:20px;">
+    <h1>ERORR 404.</h1>
+    <h3 style="color:var(--black3)">That’s an error.</h3>
+    <p>
+        The requested URL was not found on this server. That’s all we know.
+    </p>
+    <div class="go_home">
+        <a href="/" class="custom-btn" style="text-decoration: none;">Home</a>
+    </div>
+</div>
+{% endblock %}
