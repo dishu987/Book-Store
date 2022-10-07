@@ -9,6 +9,8 @@ from django.urls import re_path as url
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('removeFav/',views.Remove_fav,name="remove_fav"),
+    path('addFav/',views.Add_fav,name="add_fav"),
     path('find/q=<str:name>&page=<int:page>', views.find, name='find'),
     path('saved&page=<int:page>',views.saved_books,name="saved_books"),
     path('accounts/login/',auth_views.LoginView.as_view(template_name='base/login.html',authentication_form=LoginForm),name='login'),

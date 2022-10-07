@@ -41,6 +41,5 @@ def get_Amazon(prod_name):
                 items.append([product_name, rating, rating_count, price, product_url,product_img,date,auther,price_actual])
             except AttributeError:
                 continue
-        sleep(1.5)
     return items
 

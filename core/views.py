@@ -28,23 +28,8 @@ def find(request,name,page):
     if page<1:
         return redirect(find,name,1)
     if request.method=="POST":
-        if request.POST.get("save_to_fav")=="save_to_fav":
-            #  <!-- ('id','title','selling_price','discounted','description','brand','product_image',) -->
-            title = request.POST['title']
-            selling_price = request.POST['selling_price']
-            discounted = request.POST['discounted']
-            brand = request.POST['brand']
-            product_image = request.POST['product_image']
-            auther = request.POST['auther']
-            description = request.POST['description']
-            date = request.POST['date']
-            rating_count = request.POST['rating_count']
-            rating = request.POST['rating']
-            Favbooks(user = request.user,title=title,selling_price=selling_price,discounted=discounted,description=description,brand=brand,product_image=product_image,auther=auther,date=date,rating_count=rating_count,rating=rating).save()
-            return redirect(saved_books,1)
-        else:
-            name = request.POST['name']
-            return redirect(find, name,1)
+        name = request.POST['name']
+        return redirect(find, name,1)
     is_valid = False
     data = get_Amazon(name)
     saved_len=0
@@ -81,14 +66,8 @@ def find(request,name,page):
 @login_required
 def saved_books(request,page):
     if request.method=="POST":
-        if request.POST.get('delete_book')=='delete_book':
-            book_id = request.POST['book_id']
-            c = Favbooks.objects.filter(pk=book_id)
-            c.delete()
-            messages.success(request,'Congrats! Deleted successfully.')
-        else:
-            name = request.POST['name']
-            return redirect(find, name,1)
+        name = request.POST['name']
+        return redirect(find, name,1)
     data = Favbooks.objects.filter(user=request.user)
     recent_search = RecentSearch.objects.filter(user=request.user).order_by('-id')
     saved_len = len(data)
@@ -133,3 +112,38 @@ class RegisterationView(View):
 
 def Error_404(request,exception):
     return render(request, 'base/404.html')
+
+@login_required()
+def Remove_fav(request):
+    if request.method == 'GET':
+        book_id = request.GET['book_id']
+        c = Favbooks.objects.filter(id=book_id)
+        c.delete()  
+        fav_books_len = len(Favbooks.objects.filter(user=request.user))
+        print(fav_books_len)
+        data = {
+            "message":"Book has been Successfuly Deleted!",
+            "fav_books_len":fav_books_len,
+        }
+    return JsonResponse(data)
+
+@login_required()
+def Add_fav(request):
+    if request.method == 'GET':
+        title = request.GET['title']
+        selling_price = request.GET['selling_price']
+        discounted = request.GET['discounted']
+        brand = request.GET['brand']
+        product_image = request.GET['product_image']
+        auther = request.GET['auther']
+        description = request.GET['description']
+        date = request.GET['date']
+        rating_count = request.GET['rating_count']
+        rating = request.GET['rating']
+        Favbooks(user = request.user,title=title,selling_price=selling_price,discounted=discounted,description=description,brand=brand,product_image=product_image,auther=auther,date=date,rating_count=rating_count,rating=rating).save()
+        fav_len = len(Favbooks.objects.filter(user=request.user))
+        data = {
+            "message":"Book has been Successfuly Added to Favourite!",
+            "fav_len":fav_len,
+        }
+    return JsonResponse(data)

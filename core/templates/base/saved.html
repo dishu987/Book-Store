@@ -11,9 +11,11 @@
             {{message}}
         </div>
         {%endfor%}
+        <div class="alert alert-success" id="removeFav" style="width: 80vw;margin: 20px 0px;display:none">
+        </div>
     </div>
     {% if is_valid %}
-    <div class="custom_pag">
+    <div class="custom_pag" id="custom_pag">
         <a class="custom-btn" href="{% url 'saved_books' 1 %}"><svg xmlns="http://www.w3.org/2000/svg" width="16"
                 height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd"
@@ -30,7 +32,7 @@
         </a>
     </div>
     {% for x in data %}
-    <div class="book-card">
+    <div class="book-card" id="remove{{x.id}}">
         <div class="name-reveal" id="name-reveal{{forloop.counter}}">
             {{x.title}}
         </div>
@@ -96,23 +98,19 @@
                             d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
                     </svg> Buy
                 </a>
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="text" name="delete_book" value="delete_book" hidden>
-                    <input type="text" name="book_id" value="{{x.id}}" hidden>
-                    <button type="submit" id="save_to_fav" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-star-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
-                        </svg> Unsave
-                        </a>
-                </form>
+                <button id="save_to_fav" class="remove_fav" book_id="{{x.id}}" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-trash3" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                    </svg> Delete
+                </button>
             </div>
         </div>
     </div>
     {%endfor%} {%else%}
     <h3>Oops! Nothing to show here...</h3>
     {%endif%}
+    <h3 id="book_len" style="display: none;">Oops! Nothing to show here...</h3>
 </div>
 {% endblock %}

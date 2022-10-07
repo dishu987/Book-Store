@@ -118,7 +118,7 @@
 }
 
 .book-card>.book-info>.book-link>a,
-.book-card>.book-info>.book-link>form>button {
+.book-card>.book-info>.book-link>button {
     /* background-color: var(--red); */
     padding: 10px 20px;
     width: 150px;
@@ -145,13 +145,13 @@
     border: 1px dashed var(--red);
 }
 
-.book-card>.book-info>.book-link>form>#save_to_fav {
+.book-card>.book-info>.book-link>#save_to_fav {
     background-color: var(--blue);
     color: var(--black3);
     border: 1px solid var(--blue);
 }
 
-.book-card>.book-info>.book-link>form>#save_to_fav:hover {
+.book-card>.book-info>.book-link>#save_to_fav:hover {
     color: var(--blue);
     background-color: var(--black3);
     border: 1px dashed var(--blue);
